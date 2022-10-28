@@ -1,0 +1,54 @@
+@startuml
+class PromiseHistoryClient{
+- getPromiseHistoryByOrderIdActivity : GetPromiseHistoryByOrderIdActivity
+
++ PromiseHistoryClient(GetPromiseHistoryByOrderIdActivity)
++ getPromiseHistoryByOrderId(String orderId) : PromiseHistory
+}
+
+class GetPromiseHistoryByOrderIdActivity{
+- orderDao : ReadOnlyDao<String, Order>
+- promiseDao : ReadOnlyDao<String, List<Promise>>
+
++ GetPromiseHistoryByOrderIdActivity(ReadOnlyDao<String, Order>, ReadOnlyDao<String, List<Promise>>)
++ getPromiseHistoryByOrderId(String orderId) : PromiseHistory
+}
+
+class OrderDao{
+- omaClient : OrderManipulationAuthorityClient
+
++ OrderDao(OrderManipulationAuthorityClient)
++ get(String) : Order
+- convertToOrderItem(OrderResultItem) : OrderItem
+}
+
+class PromiseDao{
+- dpsClient : DeliveryPromiseServiceClient
+- omaClient : OrderManipulationAuthorityClient
+
++ PromiseDao(DeliveryPromiseServiceClient, OrderManipulationAuthorityClient)
++ get(String) : List<Promise>
+- getDeliveryDateForOrderItem(String) : ZonedDateTime
+}
+
+class OrderManipulationAuthorityClient{
+- omaService : OrderManipulationAuthority
+
++ OrderManipulationAuthorityClient(OrderManipulationAuthority)
++ getCustomerOrderByOrderId(String) : OrderResult
++ getCustomerOrderItemByOrderItemId(String) : OrderResultItem
+}
+
+class DeliveryPromiseServiceClient{
+- dpService : DeliveryPromiseService
+
++ DeliveryPromiseServiceClient(DeliveryPromiseService)
++ getDeliveryPromiseByOrderItemId(String) : Promise
+}
+
+PromiseHistoryClient --> GetPromiseHistoryByOrderIdActivity
+GetPromiseHistoryByOrderIdActivity --> OrderDao
+OrderDao --> PromiseDao
+PromiseDao --> OrderManipulationAuthorityClient
+OrderManipulationAuthorityClient --> DeliveryPromiseServiceClient
+@enduml
