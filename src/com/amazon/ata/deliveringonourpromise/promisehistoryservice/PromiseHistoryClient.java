@@ -33,6 +33,6 @@ public class PromiseHistoryClient {
      *         or if no history is found.
      */
     public PromiseHistory getPromiseHistoryByOrderId(String orderId) {
-        return getPromiseHistoryByOrderIdActivity.getPromiseHistoryByOrderId(orderId); //FIXME !!!!
+        return getPromiseHistoryByOrderIdActivity.getPromiseHistoryByOrderId(orderId);
     }
 }

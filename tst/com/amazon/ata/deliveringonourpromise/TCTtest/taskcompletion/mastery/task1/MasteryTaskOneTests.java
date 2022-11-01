@@ -43,4 +43,23 @@ public class MasteryTaskOneTests {
         assertTrue(null != promises && 0 == promises.size(),
             "Expected Missed Promise CLI to not print promise history!");
     }
+    @Test
+    public void masteryTaskOne_futureYou_bugTrigger() {
+        String nonExistentOrderId = "111-749023-7630574";
+
+        PromiseHistory promiseHistory = null;
+
+        try {
+            promiseHistory = client.getPromiseHistoryByOrderId(nonExistentOrderId);
+        } catch (Exception e) {
+            fail("Expected Missed Promise CLI to not throw an exception!");
+        }
+
+        assertNull(promiseHistory.getOrder(), "Expected Missed Promise CLI to provide result!");
+        List<Promise> promises = promiseHistory.getPromises();
+        assertTrue(null != promises && 0 == promises.size(),
+                "Expected Missed Promise CLI to not print promise history!");
+
+
+    }
 }
