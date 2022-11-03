@@ -46,9 +46,36 @@ class DeliveryPromiseServiceClient{
 + getDeliveryPromiseByOrderItemId(String) : Promise
 }
 
+class App {
++ getPromiseHistoryClient : PromiseHistoryClient static
+}
+
+class App {
+- App ()
++ getPromiseHistoryClient : PromiseHistoryClient static ()
+            + getPromiseHistoryByOrderIdActivity : GetPromiseHistoryByOrderIdActivity static ()
+            + getPromiseHistoryByOrderIdActivity : GetPromiseHistoryByOrderIdActivity ()
++ getOrderDao : GetOrderDao static ()
+            + getPromiseDao : PromiseDao static ()
+            + getOrderManipulationAuthorityClient : OrderManipulationAuthorityClient static ()
+            + getDeliveryPromiseServiceClient : DeliveryPromiseServiceClient static ()
+            + getOrderManipulationAuthority : OrderManipulationAuthority static ()
+            + getDeliveryPromiseService :   DeliveryPromiseService static ()
+            + getOrderDatastore : OrderDatastore static ()
+}
+
 PromiseHistoryClient --> GetPromiseHistoryByOrderIdActivity
 GetPromiseHistoryByOrderIdActivity --> OrderDao
 OrderDao --> PromiseDao
 PromiseDao --> OrderManipulationAuthorityClient
 OrderManipulationAuthorityClient --> DeliveryPromiseServiceClient
+
+Order --> OrderItem
+PromiseDao --> DeliveryPromiseServiceClient
+OrderDao --> OrderManipulationAuthorityClient
+GetPromiseHistoryByOrderIdActivity --> PromiseDao
+PromiseHistory --> Order
+PromiseHistory --> Promise
+OrderDao ..|> ReadOnlyDao
+PromiseDao ..|> ReadOnlyDao
 @enduml
