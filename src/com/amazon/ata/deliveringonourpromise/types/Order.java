@@ -71,7 +71,7 @@ public class Order {
      * @return a list containing all of the order items in this order
      */
     public List<OrderItem> getCustomerOrderItemList() {
-        return customerOrderItemList;
+        return new ArrayList<>(customerOrderItemList);
     }
 
     public String getShipOption() {
@@ -137,7 +137,7 @@ public class Order {
          * @return updated Builder
          */
         public Builder withCustomerOrderItemList(List<OrderItem> customerOrderItemList) {
-            this.customerOrderItemList = customerOrderItemList;
+            this.customerOrderItemList = new ArrayList<>(customerOrderItemList);
             return this;
         }
 
