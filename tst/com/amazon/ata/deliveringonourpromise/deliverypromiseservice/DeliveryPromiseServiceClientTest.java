@@ -34,7 +34,7 @@ public class DeliveryPromiseServiceClientTest {
         orderItemId = null;
 
         // WHEN
-        Promise promise = client.getDeliveryPromiseByOrderItemId(orderItemId);
+        Promise promise = client.getPromise(orderItemId);
 
         // THEN
         assertNull(promise);
@@ -46,7 +46,7 @@ public class DeliveryPromiseServiceClientTest {
         orderItemId = "20";
 
         // WHEN
-        Promise promise = client.getDeliveryPromiseByOrderItemId(orderItemId);
+        Promise promise = client.getPromise(orderItemId);
 
         // THEN
         assertNull(promise);
@@ -55,7 +55,7 @@ public class DeliveryPromiseServiceClientTest {
     @Test
     public void getDeliveryPromiseByOrderItemId_validItemId_hasCorrectOrderItemId() {
         // WHEN
-        Promise promise = client.getDeliveryPromiseByOrderItemId(orderItemId);
+        Promise promise = client.getPromise(orderItemId);
 
         // THEN
         assertEquals(orderItemId, promise.getCustomerOrderItemId());
@@ -64,7 +64,7 @@ public class DeliveryPromiseServiceClientTest {
     @Test
     public void getDeliveryPromiseByOrderItemId_validItemId_setsLatestArrivalDate() {
         // WHEN
-        Promise promise = client.getDeliveryPromiseByOrderItemId(orderItemId);
+        Promise promise = client.getPromise(orderItemId);
 
         // THEN
         assertNotNull(promise.getPromiseLatestArrivalDate());
@@ -73,7 +73,7 @@ public class DeliveryPromiseServiceClientTest {
     @Test
     public void getDeliveryPromiseByOrderItemId_validItemId_setsPromiseLatestShipDate() {
         // WHEN
-        Promise promise = client.getDeliveryPromiseByOrderItemId(orderItemId);
+        Promise promise = client.getPromise(orderItemId);
 
         // THEN
         assertNotNull(promise.getPromiseLatestShipDate());
@@ -82,7 +82,7 @@ public class DeliveryPromiseServiceClientTest {
     @Test
     public void getDeliveryPromiseByOrderItemId_validItemId_setsEffectiveDate() {
         // WHEN
-        Promise promise = client.getDeliveryPromiseByOrderItemId(orderItemId);
+        Promise promise = client.getPromise(orderItemId);
 
         // THEN
         assertNotNull(promise.getPromiseEffectiveDate());
@@ -91,7 +91,7 @@ public class DeliveryPromiseServiceClientTest {
     @Test
     public void getDeliveryPromiseByOrderItemId_validItemId_setsPromiseProvidedBy() {
         // WHEN
-        Promise promise = client.getDeliveryPromiseByOrderItemId(orderItemId);
+        Promise promise = client.getPromise(orderItemId);
 
         // THEN
         assertNotNull(promise.getPromiseProvidedBy());
@@ -100,7 +100,7 @@ public class DeliveryPromiseServiceClientTest {
     @Test
     public void getDeliveryPromiseByOrderItemId_validItemId_setsAsin() {
         // WHEN
-        Promise promise = client.getDeliveryPromiseByOrderItemId(orderItemId);
+        Promise promise = client.getPromise(orderItemId);
 
         // THEN
         assertNotNull(promise.getAsin());

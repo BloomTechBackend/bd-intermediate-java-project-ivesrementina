@@ -5,9 +5,11 @@ import com.amazon.ata.deliveringonourpromise.dao.OrderDao;
 import com.amazon.ata.deliveringonourpromise.dao.PromiseDao;
 import com.amazon.ata.deliveringonourpromise.data.OrderDatastore;
 import com.amazon.ata.deliveringonourpromise.deliverypromiseservice.DeliveryPromiseServiceClient;
+import com.amazon.ata.deliveringonourpromise.orderfulfillmentservice.OrderFulfillmentServiceClient;
 import com.amazon.ata.deliveringonourpromise.ordermanipulationauthority.OrderManipulationAuthorityClient;
 import com.amazon.ata.deliveringonourpromise.promisehistoryservice.PromiseHistoryClient;
 import com.amazon.ata.deliverypromiseservice.service.DeliveryPromiseService;
+import com.amazon.ata.orderfulfillmentservice.OrderFulfillmentService;
 import com.amazon.ata.ordermanipulationauthority.OrderManipulationAuthority;
 
 /**
@@ -38,7 +40,8 @@ public class App {
     }
     public static PromiseDao getPromiseDao() {
         return new PromiseDao(getDeliveryPromiseServiceClient(),
-                              getOrderManipulationAuthorityClient()
+                              getOrderManipulationAuthorityClient(),
+                                getOrderFulfillmentPromiseServiceClient()
         );
     }
 
@@ -50,12 +53,21 @@ public class App {
         return new DeliveryPromiseServiceClient(getDeliveryPromiseService());
     }
 
+    public static OrderFulfillmentServiceClient getOrderFulfillmentPromiseServiceClient() {
+        return new OrderFulfillmentServiceClient(getOrderFulfillmentPromiseService());
+    }
+
+
     // dependency services
     public static OrderManipulationAuthority getOrderManipulationAuthority() {
         return new OrderManipulationAuthority(getOrderDatastore());
     }
     public static DeliveryPromiseService getDeliveryPromiseService() {
         return new DeliveryPromiseService(getOrderDatastore());
+    }
+
+    public static OrderFulfillmentService getOrderFulfillmentPromiseService() {
+        return  new OrderFulfillmentService(getOrderDatastore(), getDeliveryPromiseService());
     }
 
     // sample data
