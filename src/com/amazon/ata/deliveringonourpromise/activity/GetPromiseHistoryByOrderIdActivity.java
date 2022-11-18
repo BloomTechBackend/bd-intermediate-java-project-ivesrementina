@@ -1,11 +1,13 @@
 package com.amazon.ata.deliveringonourpromise.activity;
 
+import com.amazon.ata.deliveringonourpromise.comparators.PromiseAsinComparator;
 import com.amazon.ata.deliveringonourpromise.dao.ReadOnlyDao;
 import com.amazon.ata.deliveringonourpromise.types.Order;
 import com.amazon.ata.deliveringonourpromise.types.OrderItem;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
 import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,7 +49,10 @@ public class GetPromiseHistoryByOrderIdActivity {
         List<OrderItem> customerOrderItems = order.getCustomerOrderItemList();
         OrderItem customerOrderItem = null;
         if (customerOrderItems != null && !customerOrderItems.isEmpty()) {
-            customerOrderItem = customerOrderItems.get(0);
+            for (OrderItem ot : customerOrderItems){
+                customerOrderItem = customerOrderItems.get(0);
+            }
+
         }
 
         PromiseHistory history = new PromiseHistory(order);
