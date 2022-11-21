@@ -1,9 +1,6 @@
 package com.amazon.ata.deliveringonourpromise.types;
 
-import com.amazon.ata.deliveringonourpromise.comparators.PromiseAsinComparator;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

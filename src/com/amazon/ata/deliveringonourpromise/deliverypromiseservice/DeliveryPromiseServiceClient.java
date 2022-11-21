@@ -29,13 +29,12 @@ public class DeliveryPromiseServiceClient implements PromiseClient {
 
     @Override
     public Promise getPromise(String customerOrderItemId) {
-            DeliveryPromise deliveryPromise = dpService.getDeliveryPromise(customerOrderItemId);
+        DeliveryPromise deliveryPromise = dpService.getDeliveryPromise(customerOrderItemId);
 
-            if (null == deliveryPromise) {
-                return null;
-            }
-
-            return Promise.builder()
+        if (null == deliveryPromise) {
+            return null;
+        }
+        return Promise.builder()
                     .withPromiseLatestArrivalDate(deliveryPromise.getPromiseLatestArrivalDate())
                     .withCustomerOrderItemId(deliveryPromise.getCustomerOrderItemId())
                     .withPromiseLatestShipDate(deliveryPromise.getPromiseLatestShipDate())
@@ -44,6 +43,6 @@ public class DeliveryPromiseServiceClient implements PromiseClient {
                     .withPromiseProvidedBy(deliveryPromise.getPromiseProvidedBy())
                     .withAsin(deliveryPromise.getAsin())
                     .build();
-        }
     }
+}
 

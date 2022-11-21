@@ -16,21 +16,31 @@ import java.util.List;
  * DAO implementation for Promises.
  */
 public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
-        private List<DeliveryPromiseServiceClient> dpsClients = new ArrayList<>();
-        private List<OrderManipulationAuthorityClient> omaClients = new ArrayList<>();
-        private List<OrderFulfillmentServiceClient> ofClients = new ArrayList<>();
+    private List<DeliveryPromiseServiceClient> dpsClients = new ArrayList<>();
+    private List<OrderManipulationAuthorityClient> omaClients = new ArrayList<>();
+    private List<OrderFulfillmentServiceClient> ofClients = new ArrayList<>();
 
     /**
      * PromiseDao constructor, accepting service clients for DPS and OMA.
      * @param dpsClient DeliveryPromiseServiceClient for DAO to access DPS
      * @param omaClient OrderManipulationAuthorityClient for DAO to access OMA
+     * @param ofClient OrderFullfillmentServeClient for DAO to access OF
      */
-    public PromiseDao(DeliveryPromiseServiceClient dpsClient, OrderManipulationAuthorityClient omaClient, OrderFulfillmentServiceClient ofClient) {
+    public PromiseDao(DeliveryPromiseServiceClient dpsClient, OrderManipulationAuthorityClient omaClient,
+                      OrderFulfillmentServiceClient ofClient) {
         this.dpsClients.add(dpsClient);
         this.omaClients.add(omaClient);
         this.ofClients.add(ofClient);
     }
-    public PromiseDao(List<DeliveryPromiseServiceClient> dpsClient, List<OrderManipulationAuthorityClient> omaClient, List<OrderFulfillmentServiceClient> ofClient) {
+
+    /**
+     *
+     * @param dpsClient DeliveryPromiseServiceClient for DAO to access DPS
+     * @param omaClient OrderManipulationAuthorityClient for DAO to access OMA
+     * @param ofClient OrderFullfillmentServeClient for DAO to access OF
+     */
+    public PromiseDao(List<DeliveryPromiseServiceClient> dpsClient, List<OrderManipulationAuthorityClient> omaClient,
+                      List<OrderFulfillmentServiceClient> ofClient) {
         this.dpsClients.addAll(dpsClient);
         this.omaClients.addAll(omaClient);
         this.ofClients.addAll(ofClient);
@@ -51,7 +61,7 @@ public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
 
         // fetch Promise from Delivery Promise Service. If exists, add to list of Promises to return.
         // Set delivery date
-        for (DeliveryPromiseServiceClient dpsClient: dpsClients ) {
+        for (DeliveryPromiseServiceClient dpsClient: dpsClients) {
             Promise dpsPromise = dpsClient.getPromise(customerOrderItemId);
             if (dpsPromise != null) {
                 dpsPromise.setDeliveryDate(itemDeliveryDate);
